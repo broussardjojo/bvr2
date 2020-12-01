@@ -6,7 +6,6 @@ import geoplot as gplt
 def init(width, height, edgeColor, faceColor):
     boston = (-71.2, 42.2, -70.9, 42.4)
     boston_neighborhoods = gpd.read_file('datasets/Boston_Neighborhoods.geojson')
-
     return gplt.polyplot(boston_neighborhoods, extent=boston, edgecolor=edgeColor, facecolor=faceColor,
                          figsize=(width, height))
 
