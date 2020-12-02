@@ -47,3 +47,8 @@ def add_open_space(ax, color):
     open_space = gpd.read_file('datasets/Open_Space.geojson')
     ax = open_space.plot(ax=ax, color=color)
     return ax
+
+def add_visualization(ax, path, color):
+    toDraw = gpd.read_file(path)
+    ax = toDraw.plot(ax=ax, color= color)
+    return ax
