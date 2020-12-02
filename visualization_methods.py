@@ -40,3 +40,10 @@ def add_polling_locations(ax, color):
     polling_locations = gpd.read_file('datasets/Polling_Locations.geojson')
     ax = polling_locations.plot(ax=ax, color=color)
     return ax
+
+
+# Checking to see if the gpd.plot works for polygons...
+def add_open_space(ax, color):
+    open_space = gpd.read_file('datasets/Open_Space.geojson')
+    ax = open_space.plot(ax=ax, color=color)
+    return ax
