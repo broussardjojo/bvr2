@@ -10,6 +10,8 @@ def init(width, height, edgeColor, faceColor):
                          figsize=(width, height))
 
 
+# Plots the subway on the provided subplot.
+# Note that we didn't abstract this method - this is because jojo wanted it to be pretty in multiple colors.
 def add_subway(ax):
     mbta_routes = gpd.read_file('datasets/routes.geojson')
 
@@ -36,19 +38,16 @@ def add_subway(ax):
     return ax
 
 
-def add_polling_locations(ax, color):
-    polling_locations = gpd.read_file('datasets/Polling_Locations.geojson')
-    ax = polling_locations.plot(ax=ax, color=color)
+def add_visualization(ax, path, color, legendLabel):
+    toDraw = gpd.read_file(path)
+    ax = toDraw.plot(ax=ax, color= color)
     return ax
+
+
+def add_polling_locations(ax, color):
+    return add_visualization(ax, "datasets/Polling_Locations.geojson", color)
 
 
 # Checking to see if the gpd.plot works for polygons...
 def add_open_space(ax, color):
-    open_space = gpd.read_file('datasets/Open_Space.geojson')
-    ax = open_space.plot(ax=ax, color=color)
-    return ax
-
-def add_visualization(ax, path, color):
-    toDraw = gpd.read_file(path)
-    ax = toDraw.plot(ax=ax, color= color)
-    return ax
+    return add_visualization(ax, "datasets/Open_Space.geojson", color)
