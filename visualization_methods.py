@@ -38,7 +38,7 @@ def add_subway(ax):
     return ax
 
 
-def add_visualization(ax, path, color, legendLabel):
+def add_visualization(ax, path, color):
     toDraw = gpd.read_file(path)
     ax = toDraw.plot(ax=ax, color= color)
     return ax
@@ -51,3 +51,9 @@ def add_polling_locations(ax, color):
 # Checking to see if the gpd.plot works for polygons...
 def add_open_space(ax, color):
     return add_visualization(ax, "datasets/Open_Space.geojson", color)
+
+
+# Save an AxesSubplot in the resultImages folder
+def save_as(ax, name):
+    fig = ax.get_figure()
+    fig.savefig("resultImages/" + name + ".png")
