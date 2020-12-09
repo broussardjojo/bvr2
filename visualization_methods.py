@@ -77,13 +77,15 @@ def parser(vargs):
     index = 0
 
     ax = init(10, 10, "white", "lightgray")
-    while (index < len(argList) - 1):
+    while index < len(argList):
         carg = argList[index]
         # Yes i know this is bad design!
         # But it'll work and it's a proof of concept!
         # There are no switch statements in python
         # Nothing means anything to me anymore. I just want to be done with the semester
         # So that I can wallow in despair with marginally less stress on myself
+
+        #this implementation is not particularly robust. Don't try too hard to break it!
         if carg == "-subway" :
             ax = add_subway(ax)
         else:
