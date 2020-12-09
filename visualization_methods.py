@@ -57,3 +57,55 @@ def add_open_space(ax, color):
 def save_as(ax, name):
     fig = ax.get_figure()
     fig.savefig("resultImages/" + name + ".png")
+
+# Parser to create a visualization based on an input string:
+# More than anything, this is a proof of concept of a method that a front end could call based on a variety of
+# Selections by the user.
+
+# Current accepted parameters (ideally, these would be factored out into their own function):
+# - -subway : plots the MBTA on the map, with each line in their respective color
+# - -bikeNetwork [color]
+# - -publicLibraries [color]
+# - -openSpace [color]
+# - -colleges [color]
+# - -evStations [color]
+# - -pollingLocations [color]
+# - -trees [color]
+
+def parser(vargs):
+    argList = vargs.split()
+    index = 0
+
+    ax = init(10, 10, "white", "lightgray")
+    while (index < len(argList) - 1):
+        carg = argList[index]
+        # Yes i know this is bad design!
+        # But it'll work and it's a proof of concept!
+        # There are no switch statements in python
+        # Nothing means anything to me anymore. I just want to be done with the semester
+        # So that I can wallow in despair with marginally less stress on myself
+        if carg == "-subway" :
+            ax = add_subway(ax)
+        else:
+            index += 1
+            color = argList[index]
+            if carg == "-bikeNetwork":
+                ax = add_visualization(ax, "datasets/Existing_Bike_Network.geojson", color)
+            elif carg == "-publicLibraries":
+                ax = add_visualization(ax, "datasets/Public_Libraries.geojson", color)
+            elif carg == "-openSpace":
+                ax = add_visualization(ax, "datasets/Open_Space.geojson", color)
+            elif carg == "-colleges":
+                ax = add_visualization(ax, "datasets/Colleges_and_Universities.geojson", color)
+            elif carg == "-evStations":
+                ax = add_visualization(ax, "datasets/Charging_Stations.geojson", color)
+            elif carg == "-pollingLocations":
+                ax = add_visualization(ax, "datasets/Polling_Locations.geojson", color)
+            elif carg == "-trees":
+                ax = add_visualization(ax, "datasets/trees.geojson", color)
+            else:
+                print("Invalid visualization argument: " + carg)
+                return
+        index += 1
+    return ax
+
